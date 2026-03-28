@@ -1,5 +1,4 @@
-import { teams } from './data/teams';
-import { duplicatedTeams } from './hooks/duplicatedTeams/duplicatedTeams';
+import { allCards } from "./hooks/allCards/allCards"
 
 function App() {
 
@@ -7,7 +6,7 @@ function App() {
     <>
     <div className='flex flex-wrap justify-center gap-5'>
       {
-        teams.map(time => (
+        allCards.map(time => (
           <div key={time.id} className='flex flex-col items-center gap-3'>
             <p>{time.name}</p>
             <img src={time.image} alt={time.name} className='w-32 h-32' />
