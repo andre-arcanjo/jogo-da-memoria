@@ -1,4 +1,4 @@
-import { allCards } from "./hooks/allCards/allCards"
+import { shuffledCards } from "./hooks/shuffledCards/shuffledCards"
 
 function App() {
 
@@ -6,7 +6,7 @@ function App() {
     <>
     <div className='flex flex-wrap justify-center gap-5'>
       {
-        allCards.map(time => (
+        shuffledCards.map(time => (
           <div key={time.id} className='flex flex-col items-center gap-3'>
             <p>{time.name}</p>
             <img src={time.image} alt={time.name} className='w-32 h-32' />
