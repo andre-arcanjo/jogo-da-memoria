@@ -2,7 +2,7 @@ type Team = {
     id: number,
     name: string,
     image: string,
-    flipped: false
+    flipped: boolean
 }
 
 export const teams: Team[] = [
