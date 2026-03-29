@@ -10,24 +10,23 @@ function App() {
 
     if (selectedCards.length === 2) return
 
+    const clickedCard = cards.find(card => card.id === id)
+
+    if (!clickedCard) return
+    if (clickedCard?.flipped) return
+
     const updatedCards = cards.map(card => {
 
       if (card.id === id) {
         return {
           ...card,
-          flipped: !card.flipped
+          flipped: true
         }
       }
       return card;
     })
 
-    setCards(updatedCards)
-
-    const clickedCard = updatedCards.find(card => card.id === id)
-
-    if (!clickedCard) return
-
-    const newSelectedCards = [...selectedCards, clickedCard]
+    const newSelectedCards = [...selectedCards, { ...clickedCard, flipped: true }]
 
     setCards(updatedCards)
     setSelectedCards(newSelectedCards)
@@ -39,17 +38,15 @@ function App() {
         setSelectedCards([])
       } else {
         setTimeout(() => {
-          const resetCards = updatedCards.map(card => {
-            if (card.id === first.id || card.id === second.id) {
-              return {
-                ...card,
-                flipped: false
+          setCards(prevCards => {
+            return prevCards.map(card => {
+              if (card.id === first.id || card.id === second.id) {
+                return { ...card, flipped: false }
               }
-            }
-            return card
+              return card
+            })
           })
 
-          setCards(resetCards)
           setSelectedCards([])
         }, 800)
       }
