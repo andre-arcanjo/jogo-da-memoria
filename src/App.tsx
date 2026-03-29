@@ -1,10 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { shuffledCards } from "./hooks/shuffledCards/shuffledCards"
 
 function App() {
 
   const [cards, setCards] = useState(shuffledCards)
   const [selectedCards, setSelectedCards] = useState<typeof cards>([])
+  const [hasWon, setHasWon] = useState(false)
+
+  useEffect(() => {
+    if (cards.every(card => card.matched)) {
+      setHasWon(true)
+    }
+  }, [cards])
 
   function handleCardClick(id: number) {
 
@@ -35,6 +42,18 @@ function App() {
       const [first, second] = newSelectedCards
 
       if (first.name === second.name) {
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if (card.id === first.id || card.id === second.id) {
+              return {
+                ...card,
+                matched: true
+              }
+            }
+            return card
+          })
+        })
+
         setSelectedCards([])
       } else {
         setTimeout(() => {
@@ -55,8 +74,10 @@ function App() {
   }
 
   return (
-    <>
-      <div className='min-h-screen flex flex-wrap justify-center gap-6'>
+    <div className="min-h-screen space-y-4 flex flex-col justify-center items-center">
+      <h1 className="text-3xl">Jogo da Memória</h1>
+      <h2 className="text-2xl">Tema: Times Brasileirão Serie <span className="text-green-700">A</span> 2026</h2>
+      <div className='flex flex-wrap justify-center gap-4'>
         {
           cards.map(time => (
             <button onClick={() => handleCardClick(time.id)} key={time.id} className='flex flex-col items-center gap-3 cursor-pointer'>
@@ -74,8 +95,11 @@ function App() {
             </button>
           ))
         }
+        {hasWon && 
+        <h1 className="text-2xl">Você venceu! 🎉  <a className="bg-green-700 text-white p-1 rounded-lg hover:bg-green-500 transition-all" href="/">Começar novamente</a></h1>
+        }
       </div>
-    </>
+    </div>
   )
 }
 
