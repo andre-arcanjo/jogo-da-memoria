@@ -4,7 +4,7 @@ import { shuffledCards } from "./hooks/shuffledCards/shuffledCards"
 function App() {
 
   const [cards, setCards] = useState(shuffledCards)
-  const [selectedCards, setSelectedCards] = useState([])
+  const [selectedCards, setSelectedCards] = useState<typeof cards>([])
 
   function handleCardClick(id: number) {
 
@@ -25,7 +25,9 @@ function App() {
 
     const clickedCard = updatedCards.find(card => card.id === id)
 
-    const newSelectedCards: any = [...selectedCards, clickedCard]
+    if (!clickedCard) return
+
+    const newSelectedCards = [...selectedCards, clickedCard]
 
     setCards(updatedCards)
     setSelectedCards(newSelectedCards)
@@ -49,7 +51,7 @@ function App() {
 
           setCards(resetCards)
           setSelectedCards([])
-        }, 1000)
+        }, 800)
       }
     }
 
@@ -57,15 +59,15 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-wrap justify-center gap-16'>
+      <div className='min-h-screen flex flex-wrap justify-center gap-6'>
         {
           cards.map(time => (
             <button onClick={() => handleCardClick(time.id)} key={time.id} className='flex flex-col items-center gap-3 cursor-pointer'>
               {time.flipped ?
                 (
-                  <div className="w-32 h-32 flex flex-col items-center justify-center">
+                  <div className="w-32 h-32 flex flex-col items-center justify-center gap-2">
                     <p>{time.name}</p>
-                    <img src={time.image} alt={time.name} className='w-16 h-16' />
+                    <img src={time.image} alt={time.name} className='w-14 h-14' />
                   </div>
                 ) :
                 (
