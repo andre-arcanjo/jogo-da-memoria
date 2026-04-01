@@ -13,21 +13,14 @@ function App() {
     }
   }, [cards])
 
-  // se todas as cartas estão como matched true, muda o estado de hasWon para true, ou seja, terminou o jogo
-
   function handleCardClick(id: number) {
 
     if (selectedCards.length === 2) return
 
-    // se o usuário clicar em 2 cartas, não faz nada, pra não bugar o jogo
-
     const clickedCard = cards.find(card => card.id === id)
-
-    // selecionar a carta clicada
 
     if (!clickedCard) return
     if (clickedCard?.flipped) return
-    // se a carta clicada ja estiver virada, nao faz nada
 
     const updatedCards = cards.map(card => {
 
@@ -40,8 +33,6 @@ function App() {
       return card;
     })
 
-    // virar a carta
-
     const newSelectedCards = [...selectedCards, { ...clickedCard, flipped: true }]
 
     setCards(updatedCards)
@@ -49,8 +40,6 @@ function App() {
 
     if (newSelectedCards.length === 2) {
       const [first, second] = newSelectedCards
-
-      //sempre que tem 2 cartas viradas, faz a comparação
 
       if (first.name === second.name) {
         setCards(prevCards => {
@@ -64,8 +53,6 @@ function App() {
             return card
           })
         })
-
-        // comparação
 
         setSelectedCards([])
       } else {
@@ -83,7 +70,6 @@ function App() {
         }, 800)
       }
     }
-          // desvirar a carta se a comparação estiver errada
   }
 
   return (
@@ -109,7 +95,7 @@ function App() {
           ))
         }
         {hasWon && 
-        <h1 className="sm:text-2xl">Você venceu! 🎉  <a className="bg-green-700 text-white p-1 rounded-lg hover:bg-green-500 transition-all" href="/">Começar novamente</a></h1>
+        <h1 className="sm:text-2xl">Você venceu! 🎉  <a className="bg-green-700 text-white p-1 rounded-lg hover:bg-green-500 transition-all" href="/jogo-da-memoria/">Começar novamente</a></h1>
         }
       </div>
     </div>
