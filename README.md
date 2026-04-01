@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# Jogo da Memoria - Times do Brasileirao Serie A 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacao web de jogo da memoria feita com React + TypeScript + Vite.
 
-Currently, two official plugins are available:
+O tema atual usa escudos de times do Brasileirao Serie A 2026.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
 
-## React Compiler
+Confira o jogo rodando em: https://andre-arcanjo.github.io/jogo-da-memoria/  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Tailwind CSS 
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Como rodar localmente
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Instale as dependencias:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Inicie o servidor de desenvolvimento:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Abra no navegador (normalmente):
+
+```text
+http://localhost:5173
+```
+
+## Regras do jogo
+
+- O tabuleiro possui pares de cartas (cada time aparece 2 vezes).
+- O jogador pode virar ate 2 cartas por vez.
+- Se o par for igual, as cartas ficam marcadas como encontradas.
+- Se forem diferentes, as cartas voltam apos um pequeno delay.
+- Quando todos os pares sao encontrados, aparece a mensagem de vitoria.
+
+## Estrutura principal
+
+```text
+src/
+  App.tsx                           # logica principal do jogo e interface
+  data/teams.ts                     # lista base de times/cartas
+  hooks/duplicatedTeams/            # duplica as cartas para formar pares
+  hooks/allCards/                   # combina listas de cartas
+  hooks/shuffledCards/              # embaralha as cartas
+  style/globals.css                 # import do Tailwind
+public/                             # imagens dos escudos
 ```
