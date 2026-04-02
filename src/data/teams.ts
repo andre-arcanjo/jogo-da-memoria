@@ -135,7 +135,7 @@ export const teams: Team[] = [
     },
     {
         id: 19,
-        name: 'Vasco da Gama',
+        name: 'Vasco',
         image: 'vasco.png',
         flipped: false,
         matched: false

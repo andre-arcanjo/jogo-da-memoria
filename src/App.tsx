@@ -82,13 +82,13 @@ function App() {
             <button onClick={() => handleCardClick(time.id)} key={time.id} className='flex flex-col items-center gap-3 cursor-pointer'>
               {time.flipped ?
                 (
-                  <div className="w-16 h-16 sm:w-32 sm:h-32 bg-gray-200 flex flex-col items-center justify-center gap-2 rounded-lg">
-                    <p className="text-[10px] sm:text-[16px]">{time.name}</p>
-                    <img src={time.image} alt={time.name} className='w-7 h-7 sm:w-14 sm:h-14' />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 2xl:w-32 2xl:h-32 bg-gray-200 flex flex-col items-center justify-center gap-2 rounded-lg">
+                    <p className="text-[10px] sm:text-[13px] 2xl:text-[16px]">{time.name}</p>
+                    <img src={time.image} alt={time.name} className='w-7 h-7 sm:w-10 sm:h-10 2xl:w-14 2xl:h-14' />
                   </div>
                 ) :
                 (
-                  <div className="bg-gray-600 w-16 h-16 sm:w-32 sm:h-32 rounded-lg hover:bg-gray-800">
+                  <div className="bg-gray-600 w-16 h-16 sm:w-20 sm:h-20 2xl:w-32 2xl:h-32 rounded-lg hover:bg-gray-800">
                   </div>
                 )}
             </button>
