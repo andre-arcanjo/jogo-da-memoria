@@ -73,22 +73,22 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen space-y-4 flex flex-col justify-center items-center">
+    <div className="min-h-screen space-y-4 flex flex-col justify-center items-center px-2 sm:px-16 2xl:px-2 ">
       <h1 className="text-3xl">Jogo da Memória</h1>
       <h2 className="sm:text-2xl">Tema: Times Brasileirão Serie <span className="text-green-700">A</span> 2026</h2>
       <div className='flex flex-wrap justify-center gap-4'>
         {
           cards.map(time => (
-            <button onClick={() => handleCardClick(time.id)} key={time.id} className='flex flex-col items-center gap-3 cursor-pointer'>
+            <button onClick={() => handleCardClick(time.id)} key={time.id} className='flex flex-col items-center cursor-pointer'>
               {time.flipped ?
                 (
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 2xl:w-32 2xl:h-32 bg-gray-200 flex flex-col items-center justify-center gap-2 rounded-lg">
-                    <p className="text-[10px] sm:text-[13px] 2xl:text-[16px]">{time.name}</p>
+                  <div className="w-16 h-16 sm:w-18 sm:h-18 2xl:w-32 2xl:h-32 bg-gray-200 flex flex-col items-center justify-center gap-2 rounded-lg">
+                    <p className="text-[10px] sm:text-[11.5px] 2xl:text-[16px]">{time.name}</p>
                     <img src={time.image} alt={time.name} className='w-7 h-7 sm:w-10 sm:h-10 2xl:w-14 2xl:h-14' />
                   </div>
                 ) :
                 (
-                  <div className="bg-gray-600 w-16 h-16 sm:w-20 sm:h-20 2xl:w-32 2xl:h-32 rounded-lg hover:bg-gray-800">
+                  <div className="bg-gray-600 w-16 h-16 sm:w-18 sm:h-18 2xl:w-32 2xl:h-32 rounded-lg hover:bg-gray-800">
                   </div>
                 )}
             </button>
