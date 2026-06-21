@@ -2,72 +2,91 @@ import { useEffect, useState } from 'react';
 import { shuffledCards } from './hooks/shuffledCards/shuffledCards';
 
 function App() {
+  // Estado das cartas com propriedades de Id, nome, imagem, se está virada e se foi pareada
   const [cards, setCards] = useState(shuffledCards);
+  // Rastreia as duas cartas selecionadas no momento do clique
   const [selectedCards, setSelectedCards] = useState<typeof cards>([]);
+  // Controla se o jogador ganhou o jogo
   const [hasWon, setHasWon] = useState(false);
 
+  // Verifica se todas as cartas foram pareadas para determinar se o jogador venceu
   useEffect(() => {
     if (cards.every((card) => card.matched)) {
+      // Se todas as cartas têm matched === true, o jogador venceu
       setHasWon(true);
     }
-  }, [cards]);
+  }, [cards]); // Executa sempre que o estado de cards mudar
 
+  // Função executada quando o jogador clica em uma carta
   function handleCardClick(id: number) {
+    // Evita clicar em mais cartas se já há 2 selecionadas
     if (selectedCards.length === 2) return;
 
+    // Encontra a carta clicada pelo ID
     const clickedCard = cards.find((card) => card.id === id);
 
+    // Validações: se a carta não existe ou já foi virada, retorna
     if (!clickedCard) return;
     if (clickedCard?.flipped) return;
 
+    // Atualiza o array de cartas, marcando a carta clicada como virada
     const updatedCards = cards.map((card) => {
       if (card.id === id) {
         return {
           ...card,
-          flipped: true,
+          flipped: true, // Vira a carta
         };
       }
       return card;
     });
 
+    // Adiciona a carta clicada à lista de cartas selecionadas
     const newSelectedCards = [
       ...selectedCards,
       { ...clickedCard, flipped: true },
     ];
 
+    // Atualiza os estados com as cartas viradas e selecionadas
     setCards(updatedCards);
     setSelectedCards(newSelectedCards);
 
+    // Quando 2 cartas foram selecionadas, verifica se são um par
     if (newSelectedCards.length === 2) {
       const [first, second] = newSelectedCards;
 
+      // Verifica se as duas cartas têm o mesmo nome (mesmo time)
       if (first.name === second.name) {
+        // ACERTO: marca as duas cartas como pareadas
         setCards((prevCards) => {
           return prevCards.map((card) => {
             if (card.id === first.id || card.id === second.id) {
               return {
                 ...card,
-                matched: true,
+                matched: true, // Marca como pareada permanentemente
               };
             }
             return card;
           });
         });
 
+        // Limpa a seleção para o próximo par
         setSelectedCards([]);
       } else {
+        // ERRO: as cartas não combinam, espera 800ms e vira de volta
         setTimeout(() => {
+          // Desvira as duas cartas que não deram match
           setCards((prevCards) => {
             return prevCards.map((card) => {
               if (card.id === first.id || card.id === second.id) {
-                return { ...card, flipped: false };
+                return { ...card, flipped: false }; // Vira de volta para baixo
               }
               return card;
             });
           });
 
+          // Limpa a seleção para o próximo par
           setSelectedCards([]);
-        }, 800);
+        }, 800); // 800ms de espera para o jogador ver as cartas antes de virar
       }
     }
   }
@@ -104,7 +123,7 @@ function App() {
         ))}
       </div>
       {hasWon && (
-        <div className='py-2'>
+        <div className="py-2">
           <h1 className="sm:text-2xl">
             Você venceu! 🎉{' '}
             <a
