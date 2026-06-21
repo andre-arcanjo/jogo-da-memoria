@@ -1,6 +1,6 @@
-import { teams } from "../../data/teams";
+import { teams } from '../../data/teams';
 
-export const duplicatedTeams = teams.map(time => ({
-    ...time,
-    id:time.id + 100,
-}))
+export const duplicatedTeams = teams.map((time) => ({
+  ...time,
+  id: time.id + 100,
+}));

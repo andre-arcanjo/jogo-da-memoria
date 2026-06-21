@@ -1,3 +1,3 @@
-import { allCards } from "../allCards/allCards"
+import { allCards } from '../allCards/allCards';
 
-export const shuffledCards = allCards.sort(() => Math.random() - 0.5)
+export const shuffledCards = allCards.sort(() => Math.random() - 0.5);
