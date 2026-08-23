@@ -92,13 +92,13 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen space-y-4 flex flex-col justify-center items-center px-2 sm:px-16 2xl:px-2 ">
+    <div className="min-h-screen space-y-4 flex flex-col justify-center items-center px-2 py-1 sm:px-16 2xl:px-2 ">
       <h1 className="text-3xl">Jogo da Memória</h1>
       <h2 className="sm:text-2xl">
         Tema: Times Brasileirão Serie <span className="text-green-700">A</span>{' '}
         2026
       </h2>
-      <div className="flex flex-wrap justify-center gap-4 lg:mx-25">
+      <div className="flex w-full max-w-360 flex-wrap justify-center gap-2 px-1 sm:gap-3">
         {cards.map((team) => (
           <button
             onClick={() => handleCardClick(team.id)}
@@ -106,18 +106,18 @@ function App() {
             className="flex flex-col items-center cursor-pointer"
           >
             {team.flipped ? (
-              <div className="w-16 h-16 sm:w-18 sm:h-18 2xl:w-32 2xl:h-32 bg-gray-200 flex flex-col items-center justify-center gap-2 rounded-lg cursor-default">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-26 lg:h-26 2xl:w-32 2xl:h-32 bg-gray-200 flex flex-col items-center justify-center gap-2 rounded-lg cursor-default">
                 <p className="text-[10px] sm:text-[11.5px] 2xl:text-[16px]">
                   {team.name}
                 </p>
                 <img
                   src={team.image}
                   alt={team.name}
-                  className="w-7 h-7 sm:w-10 sm:h-10 2xl:w-14 2xl:h-14"
+                  className="w-7 h-7 sm:w-10 sm:h-10 lg:w-12 lg:h-12 2xl:w-14 2xl:h-14"
                 />
               </div>
             ) : (
-              <div className="bg-gray-600 w-16 h-16 sm:w-18 sm:h-18 2xl:w-32 2xl:h-32 rounded-lg hover:bg-gray-800"></div>
+              <div className="bg-gray-600 w-16 h-16 sm:w-20 sm:h-20 lg:w-26 lg:h-26 2xl:w-32 2xl:h-32 rounded-lg hover:bg-gray-800"></div>
             )}
           </button>
         ))}
