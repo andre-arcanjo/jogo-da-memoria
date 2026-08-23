@@ -123,16 +123,14 @@ function App() {
         ))}
       </div>
       {hasWon && (
-        <div className="py-2">
-          <h1 className="sm:text-2xl">
-            Você venceu! 🎉{' '}
-            <a
-              className="bg-green-700 text-white p-1 rounded-lg hover:bg-green-500 transition-all"
-              href="/jogo-da-memoria/"
-            >
-              Começar novamente
-            </a>
-          </h1>
+        <div className="flex w-full max-w-md flex-col items-center justify-center gap-2 px-4 py-1 text-center">
+          <h1 className="xl:text-3xl">Você venceu!</h1>
+          <a
+            className="bg-green-700 text-white p-1 rounded-lg hover:bg-green-500 transition-all text-center text-[16px] xl:text-2xl"
+            href="/jogo-da-memoria/"
+          >
+            Começar novamente
+          </a>
         </div>
       )}
     </div>
